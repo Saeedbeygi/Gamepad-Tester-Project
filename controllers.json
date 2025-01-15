@@ -1,0 +1,26 @@
+[
+  {
+    "model": "DualSense Wireless Controller",
+    "vendor": "054c",
+    "product": "0ce6",
+    "features": ["Adaptive Triggers", "Haptic Feedback", "Built-in Microphone"]
+  },
+  {
+    "model": "DualSense Edge Wireless Controller",
+    "vendor": "054c",
+    "product": "0ce7",
+    "features": ["Customizable Buttons", "Interchangeable Stick Caps"]
+  },
+  {
+    "model": "DualShock 4 Wireless Controller",
+    "vendor": "054c",
+    "product": "05c4",
+    "features": ["Touchpad", "Lightbar", "Built-in Speaker"]
+  },
+  {
+    "model": "PS Move Motion Controller",
+    "vendor": "054c",
+    "product": "03d5",
+    "features": ["Motion Sensing", "Vibration Feedback"]
+  }
+]
