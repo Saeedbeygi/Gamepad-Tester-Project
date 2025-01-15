@@ -6,6 +6,15 @@ body {
     margin: 0;
     padding: 20px;
     text-align: center;
+    
+      #controller-details div {
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+    
 }
 
 h1 {
