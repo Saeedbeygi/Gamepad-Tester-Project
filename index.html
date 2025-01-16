@@ -38,25 +38,38 @@
         <h2>PLAYER 1</h2>
         <p id="gamepad-status">No gamepad detected</p>
     </div>
-<svg class="controller" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
-        <!-- Left Handle -->
-        <path d="M100 150 C50 100, 50 200, 100 250 L150 250 L150 50 L100 50 Z" fill="#ccc" />
-        <!-- Right Handle -->
-        <path d="M400 150 C450 100, 450 200, 400 250 L350 250 L350 50 L400 50 Z" fill="#ccc" />
+  <div style="margin-left: -10px;">
+        <div class="controller">
+          
+        <svg style="width: 100%; height: 100%; position: absolute; z-index: 1;">
+        <g transform="translate(78.5 78.5) scale(0.95, 0.95)">
+        <circle cx="0" cy="0" r="78.5" fill="none" stroke="hsla(210,90%,20%,0.2)" stroke-width="1"></circle>
         
-        <!-- Buttons -->
-        <circle id="button-cross" class="button" cx="400" cy="150" r="15" />
-        <circle id="button-circle" class="button" cx="430" cy="120" r="15" />
-        <circle id="button-square" class="button" cx="370" cy="120" r="15" />
-        <circle id="button-triangle" class="button" cx="400" cy="90" r="15" />
+        <line x1="0" y1="-78.5" x2="0" y2="78.5" stroke="hsla(210,90%,20%,0.2)" stroke-width="1"></line>
+        <line x1="-78.5" y1="0" x2="78.5" y2="0" stroke="hsla(210,90%,20%,0.2)" stroke-width="1"></line>
+        <line x1="0" y1="0" x2="0.307847797870636" y2="-1.5392155945301056" stroke="hsl(210,90%,20%)" stroke-width="1"></line>
+        <circle cx="0.307847797870636" cy="-1.5392155945301056" r="4" fill="hsl(210,90%,20%)"></circle>
+        </g>
+        
+        </svg>
+        
+        </div>
+          <div class="controller">
+          <svg style="width: 100%; height: 100%; position: absolute; z-index: 1;">
+          <g transform="translate(78.5 78.5) scale(0.95, 0.95)">
+          <circle cx="0" cy="0" r="78.5" fill="none" stroke="hsla(210,90%,20%,0.2)" stroke-width="1"></circle>
+          <line x1="0" y1="-78.5" x2="0" y2="78.5" stroke="hsla(210,90%,20%,0.2)" stroke-width="1"></line>
+          <line x1="-78.5" y1="0" x2="78.5" y2="0" stroke="hsla(210,90%,20%,0.2)" stroke-width="1"></line>
+          <line x1="0" y1="0" x2="-0.3078431189060211" y2="0.307847797870636" stroke="hsl(210,90%,20%)" stroke-width="1">
+         </line>
+         <circle cx="-0.3078431189060211" cy="0.307847797870636" r="4" fill="hsl(210,90%,20%)"></circle>
+          </g>
+          </svg>
+          </div>
+        </div>
+        
+        <div><p style="font-size: 75%; opacity: 0.5;">Diagnostics:</p><label><input type="checkbox"> Test Circularity </label></div>
 
-        <!-- Left Stick -->
-        <circle id="left-stick" class="button" cx="150" cy="150" r="25" />
-
-        <!-- Right Stick -->
-        <circle id="right-stick" class="button" cx="300" cy="200" r="25" />
-    </svg>
-<!--
     <script>
         window.addEventListener('gamepadconnected', (event) => {
             console.log('Gamepad connected:', event.gamepad);
@@ -101,7 +114,7 @@
             return buttonMap[index] || '';
         }
     </script>
-    -->
+    
     
     <script src="script.js"></script>
 </body>
