@@ -39,7 +39,24 @@
         <p id="gamepad-status">No gamepad detected</p>
     </div>
 
-    
+    <svg class="controller" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left Handle -->
+        <path d="M100 150 C50 100, 50 200, 100 250 L150 250 L150 50 L100 50 Z" fill="#ccc" />
+        <!-- Right Handle -->
+        <path d="M400 150 C450 100, 450 200, 400 250 L350 250 L350 50 L400 50 Z" fill="#ccc" />
+        
+        <!-- Buttons -->
+        <circle id="button-cross" class="button" cx="400" cy="150" r="15" />
+        <circle id="button-circle" class="button" cx="430" cy="120" r="15" />
+        <circle id="button-square" class="button" cx="370" cy="120" r="15" />
+        <circle id="button-triangle" class="button" cx="400" cy="90" r="15" />
+
+        <!-- Left Stick -->
+        <circle id="left-stick" class="button" cx="150" cy="150" r="25" />
+
+        <!-- Right Stick -->
+        <circle id="right-stick" class="button" cx="300" cy="200" r="25" />
+    </svg>
     
  </svg>
  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rotate" class="svg-inline--fa fa-rotate fa-spin fa-2x " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" color="#6cf" style="margin-right: 10px; margin-left: 30px;">
