@@ -1,11 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gamepad Tester</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         body {
             background-color: #121212;
@@ -32,7 +30,9 @@
     </style>
 </head>
 <body>
-  <div>  <h1>Gamepad Tester</h1></div>
+    <div>
+        <h1>Gamepad Tester</h1>
+    </div>
     <div id="controller-details"></div>
     <div id="player-info">
         <h2>PLAYER 1</h2>
@@ -57,25 +57,21 @@
         <!-- Right Stick -->
         <circle id="right-stick" class="button" cx="300" cy="200" r="25" />
     </svg>
-    
-
-
-    
-  </div>
-      </div>
-              </div>
-</div>
 
     <script>
         window.addEventListener('gamepadconnected', (event) => {
             console.log('Gamepad connected:', event.gamepad);
+            document.getElementById('gamepad-status').textContent = 'Gamepad connected';
             requestAnimationFrame(updateGamepad);
         });
 
         function updateGamepad() {
             const gamepads = navigator.getGamepads();
             const gp = gamepads[0];
-            if (!gp) return;
+            if (!gp) {
+                document.getElementById('gamepad-status').textContent = 'No gamepad detected';
+                return;
+            }
 
             // Buttons
             gp.buttons.forEach((button, index) => {
@@ -92,10 +88,16 @@
             // Analog sticks
             const leftStick = document.querySelector('#left-stick');
             const rightStick = document.querySelector('#right-stick');
-            leftStick.setAttribute('cx', 150 + gp.axes[0] * 25);
-            leftStick.setAttribute('cy', 150 + gp.axes[1] * 25);
-            rightStick.setAttribute('cx', 300 + gp.axes[2] * 25);
-            rightStick.setAttribute('cy', 200 + gp.axes[3] * 25);
+            const leftStickX = gp.axes[0]; // Left stick horizontal
+            const leftStickY = gp.axes[1]; // Left stick vertical
+            const rightStickX = gp.axes[2]; // Right stick horizontal
+            const rightStickY = gp.axes[3]; // Right stick vertical
+
+            // Move the sticks based on the axes
+            leftStick.setAttribute('cx', 150 + leftStickX * 25);
+            leftStick.setAttribute('cy', 150 + leftStickY * 25);
+            rightStick.setAttribute('cx', 300 + rightStickX * 25);
+            rightStick.setAttribute('cy', 200 + rightStickY * 25);
 
             requestAnimationFrame(updateGamepad);
         }
@@ -110,8 +112,6 @@
             return buttonMap[index] || '';
         }
     </script>
-    
-    
-    <script src="script.js"></script>
 </body>
 </html>
+
