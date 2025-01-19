@@ -2,34 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>PS5 Controller Test</title>
+  <title>PS5 Controller Test with Error</title>
+  <style>
+    .stick-container {
+      display: flex;
+      gap: 20px;
+    }
+    .stick-display {
+      position: relative;
+      width: 160px;
+      height: 160px;
+    }
+    .error-display {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-  <div style="display: flex; gap: 10px; margin-left: -10px;">
-    <div class="css-1tbapvf">
-      <svg style="width: 100%; height: 100%; position: relative; z-index: 1;">
-        <g transform="translate(78.5 78.5) scale(0.95, 0.95)">
+  <div class="stick-container">
+    <!-- Left Stick -->
+    <div class="stick-display">
+      <svg style="width: 100%; height: 100%;">
+        <g transform="translate(78.5, 78.5) scale(0.95)">
           <circle cx="0" cy="0" r="78.5" fill="none" stroke="hsla(210,90%,20%,0.2)" stroke-width="1"></circle>
-          <line x1="0" y1="-78.5" x2="0" y2="78.5" stroke="hsla(210,90%,20%,0.2)" stroke-width="1"></line>
-          <line x1="-78.5" y1="0" x2="78.5" y2="0" stroke="hsla(210,90%,20%,0.2)" stroke-width="1"></line>
           <circle cx="0" cy="0" r="4" fill="hsl(210,90%,20%)" id="left-stick"></circle>
         </g>
       </svg>
+      <div class="error-display" id="left-error">Avg Error: --%</div>
     </div>
-    <div class="css-1tbapvf">
-      <svg style="width: 100%; height: 100%; position: relative; z-index: 1;">
-        <g transform="translate(78.5 78.5) scale(0.95, 0.95)">
+    
+    <!-- Right Stick -->
+    <div class="stick-display">
+      <svg style="width: 100%; height: 100%;">
+        <g transform="translate(78.5, 78.5) scale(0.95)">
           <circle cx="0" cy="0" r="78.5" fill="none" stroke="hsla(210,90%,20%,0.2)" stroke-width="1"></circle>
-          <line x1="0" y1="-78.5" x2="0" y2="78.5" stroke="hsla(210,90%,20%,0.2)" stroke-width="1"></line>
-          <line x1="-78.5" y1="0" x2="78.5" y2="0" stroke="hsla(210,90%,20%,0.2)" stroke-width="1"></line>
           <circle cx="0" cy="0" r="4" fill="hsl(210,90%,20%)" id="right-stick"></circle>
         </g>
       </svg>
+      <div class="error-display" id="right-error">Avg Error: --%</div>
     </div>
   </div>
 
   <script>
     let gamepadIndex = null;
+    let leftStickErrors = [];
+    let rightStickErrors = [];
 
     window.addEventListener("gamepadconnected", (event) => {
       gamepadIndex = event.gamepad.index;
@@ -41,6 +62,10 @@
       gamepadIndex = null;
       console.log("Gamepad disconnected");
     });
+
+    function calculateDistance(x, y) {
+      return Math.sqrt(x * x + y * y);
+    }
 
     function updateSticks() {
       if (gamepadIndex === null) return;
@@ -56,17 +81,30 @@
         leftStickCircle.setAttribute("cx", leftStickX * 78.5);
         leftStickCircle.setAttribute("cy", leftStickY * 78.5);
 
+        const leftError = calculateDistance(leftStickX * 78.5, leftStickY * 78.5);
+        leftStickErrors.push(leftError);
+        const avgLeftError = (leftStickErrors.reduce((a, b) => a + b, 0) / leftStickErrors.length).toFixed(2);
+        document.getElementById("left-error").textContent = `Avg Error: ${avgLeftError}%`;
+
         // Right Stick
         const rightStickX = gp.axes[2];
         const rightStickY = gp.axes[3];
         const rightStickCircle = document.getElementById("right-stick");
         rightStickCircle.setAttribute("cx", rightStickX * 78.5);
         rightStickCircle.setAttribute("cy", rightStickY * 78.5);
+
+        const rightError = calculateDistance(rightStickX * 78.5, rightStickY * 78.5);
+        rightStickErrors.push(rightError);
+        const avgRightError = (rightStickErrors.reduce((a, b) => a + b, 0) / rightStickErrors.length).toFixed(2);
+        document.getElementById("right-error").textContent = `Avg Error: ${avgRightError}%`;
       }
 
       requestAnimationFrame(updateSticks);
     }
   </script>
+</body>
+</html>
+
 </body>
 </html>
 
